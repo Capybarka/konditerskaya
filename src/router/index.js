@@ -2,6 +2,7 @@ import { createMemoryHistory, createRouter } from 'vue-router'
 import HomePage from '../pages/HomePage.vue'
 import AdminPanel from '../pages/AdminPanel.vue'
 import AddItem from '../pages/AddItem.vue'
+import ItemPage from '../pages/ItemPage.vue'
 
 const routes = [
     {
@@ -15,6 +16,10 @@ const routes = [
     {
         path: '/add',
         component: AddItem
+    },
+    {
+        path: '/product/:id',
+        component: ItemPage
     },
 ]
 

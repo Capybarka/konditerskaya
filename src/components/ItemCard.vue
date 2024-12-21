@@ -21,6 +21,7 @@
         <p class="mb-3"><span class="text-primary font-weight-bold">Вес: </span> {{ product.weight }} грамм</p>
       
         <v-btn 
+          @click="showDetail"
           variant="tonal"
           class="mt-10 bg-primary"
         >
@@ -28,18 +29,25 @@
         </v-btn>
       </div>
     </div>
-    
-    
   </v-sheet>
 </template>
 
 <script setup>
-defineProps({
+import { useRouter } from 'vue-router';
+
+const props = defineProps({
   product: {
     type: Object,
     required: true
   }
 })
+
+const router = useRouter()
+
+const showDetail = () => {
+console.log(props.product.id)
+  router.push(`/product/${props.product.id}`)
+}
 </script>
 
 <style scoped>

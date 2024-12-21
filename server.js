@@ -8,12 +8,10 @@ import path from 'path';
 import fs from 'fs';
 import multer from 'multer';
 
-
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json()); 
 app.use(cors()); // Разрешаем все источники (временно, для разработки)
-// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Получаем путь к текущему файлу
 const __filename = fileURLToPath(import.meta.url);
@@ -34,7 +32,6 @@ db.connect(err => {
   }
   console.log('Подключено к базе данных MySQL');
 });
-
 
 // Устанавливаем хранилище для файлов с помощью Multer
 const storage = multer.diskStorage({
@@ -77,9 +74,21 @@ app.post('/api/products', upload.single('image'), (req, res) => {
   });
 });
 
-
-
-
+// получение товара по id
+app.get('/api/products/:id', (req, res) => {
+  const productId = req.params.id;
+  const query = 'SELECT * FROM products WHERE id = ?';
+  db.query(query, [productId], (err, result) => {
+    if (err) {
+      console.error('Ошибка при запросе товара:', err);
+      return res.status(500).send('Ошибка при запросе товара');
+    }
+    if (result.length === 0) {
+      return res.status(404).send('Товар не найден');
+    }
+    res.json(result[0]); // Возвращаем данные о продукте
+  });
+});
 
 
 app.get('/', (req, res) => {
@@ -104,3 +113,4 @@ const port = 8080
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 })
+
