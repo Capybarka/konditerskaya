@@ -99,11 +99,21 @@
       <v-btn 
         @click="updateProduct"
         color="primary"
-        class="mt-2 w-100" 
+        class="mt-2 w-100 mb-7" 
         type="submit" 
         prepend-icon="mdi-plus-box-multiple"
       >
         Сохранить изменения
+      </v-btn>
+
+      <v-btn 
+        @click="deleteProduct"
+        color="error"
+        class="mt-2 w-100" 
+        type="submit" 
+        prepend-icon="mdi-plus-box-multiple"
+      >
+        Удалить позицию
       </v-btn>
     </v-form>
   </v-sheet>
@@ -185,6 +195,24 @@ const updateProduct = async () => {
   }
 };
 
+const deleteProduct = async () => {
+  const productId = Number(route.params.id)
+
+  const isConfirmed = window.confirm('Вы уверены, что хотите удалить этоу позицию?')
+  if (isConfirmed) {
+    try {
+      const response = await axios.delete(`http://localhost:8080/api/products/${productId}`)
+      if (response.status === 200) {
+        alert('Позиция удалена')
+        router.push('/admin')
+      }
+    }
+    catch (error) {
+      console.warn('Ошика при удаление: ', error)
+      alert('Не удалось удалить позицию. Попробуйте снова')
+    }
+  }
+}
 onMounted(loadProduct);
 
 </script>

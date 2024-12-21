@@ -138,6 +138,26 @@ app.get('/api/products', (req, res) => {
 });
 
 
+// Маршрут для удаления товара
+app.delete('/api/products/:id', (req, res) => {
+  const productId = req.params.id;
+
+  const query = 'DELETE FROM products WHERE id = ?';
+
+  db.query(query, [productId], (err, result) => {
+    if (err) {
+      console.error('Ошибка при удалении товара:', err);
+      return res.status(500).send('Ошибка при удалении товара');
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).send('Товар не найден');
+    }
+
+    res.status(200).json({ message: 'Товар успешно удален' });
+  });
+});
+
 
 // Маршрут для авторизации администратора
 app.post('/api/login', (req, res) => {
