@@ -215,6 +215,9 @@ app.post('/api/login', (req, res) => {
 app.post('/api/register', (req, res) => {
   const { name, last_name, middle_name, email, password } = req.body;
 
+  if (!name || !last_name || !middle_name || !email || !password) {
+    return res.status(500).json({ error: 'Введены не все данные' })
+  }
    // Проверка на существующего администратора по email
    db.query('SELECT * FROM admins WHERE email = ?', [email], (err, results) => {
     if (err) {

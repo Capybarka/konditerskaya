@@ -125,7 +125,7 @@ const submitForm = async () => {
     alert(response.data.message);
   }
   catch (error) {
-    console.error('Ошибка при добавлении товара:', error);
+    alert('Ошибка при добавлении товара', error);
   }
 }
 </script>

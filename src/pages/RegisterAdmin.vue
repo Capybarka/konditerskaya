@@ -70,11 +70,10 @@ const registerAdmin = async () => {
       password: password.value,
     })
     alert('Администратор зарегистрирован')
-    console.log('Администратор зарегистрирован:', response.data)
     router.push('/admin')
   }
   catch (error) {
-    console.error('Ошибка регистрации:', error);
+    alert('Ошибка регистрации: заполните все поля', error);
   }
 }
 </script>

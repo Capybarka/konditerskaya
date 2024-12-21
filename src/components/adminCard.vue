@@ -18,7 +18,9 @@
 
 <script setup>
 import axios from 'axios'
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
 const props = defineProps({
   admin: {
     type: Object,
@@ -50,8 +52,7 @@ const deleteAdmin = async (id) => {
     router.push('/admin')
     } 
     catch (error) {
-      console.error('Ошибка при удалении администратора:', error);
-      alert('Ошибка при удалении администратора');
+      console.error('Ошибка при удалении администратора:');
     }
   }
 }
