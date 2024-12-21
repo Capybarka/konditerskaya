@@ -5,7 +5,9 @@
         <v-img
           class="rounded-lg"  
           :width="300"  
-          aspect-ratio="16/9"
+          :height="300"
+          object-fit="cover"
+          aspect-ratio="1"
           cover
           :src="product.image_url"
         ></v-img>
@@ -39,3 +41,10 @@ defineProps({
   }
 })
 </script>
+
+<style scoped>
+.v-sheet {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+</style>

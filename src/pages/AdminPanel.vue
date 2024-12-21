@@ -1,10 +1,30 @@
 <template>
   <v-sheet class="my-10 bg-background-dark elevation-10 rounded-lg pa-5">
-    <h2 class="text-primary text-center mb-10">Управление товарами</h2>
+    <h2 class="text-primary text-center mb-8">Добавление товара</h2>
+    <v-col>
+      <v-row justify="center" align="center">
+        <v-btn
+        @click="router.push('/add')"
+          variant="outlined"
+          color="primary"
+        >
+          Добавить новую позицию
+        </v-btn>
+      </v-row>
+    </v-col>
+  </v-sheet>
+
+  <v-sheet class="my-10 bg-background-dark elevation-10 rounded-lg pa-5">
+    <h2 class="text-primary text-center mb-8">Управление товарами</h2>
     <v-text-field label="Название товара"></v-text-field>
     <v-col>
       <v-row justify="center" align="center">
-        <v-btn>Найти</v-btn>
+        <v-btn
+          variant="outlined"
+          color="primary"
+        >
+          Найти
+        </v-btn>
       </v-row>
     </v-col>
   </v-sheet>
@@ -21,9 +41,10 @@
 import ItemCard from '../components/ItemCard.vue';
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const products = ref([])
-
+const router = useRouter()
 
 // Функция для получения данных
 const fetchProducts = async () => {
