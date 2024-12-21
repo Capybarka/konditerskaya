@@ -18,6 +18,7 @@
   </v-col>
   
   <v-form
+      @submit.prevent
       class="bg-background-dark rounded-lg pa-5 mw-1000">
       <v-text-field 
         variant="outlined"
@@ -30,7 +31,7 @@
       <v-text-field 
         variant="outlined"
         class="mb-3"
-        :value="product.name"
+        v-model="product.name"
         required
       ></v-text-field>
 
@@ -38,7 +39,7 @@
       <v-textarea
         variant="outlined"
         clear-icon="mdi-close-circle"
-        :value="product.description"
+        v-model="product.description"
         class="mb-3"
         clearable
         required
@@ -49,14 +50,14 @@
       <v-text-field
         variant="outlined"
         class="mb-3"
-        :value="product.category_id"
+        v-model="product.category_id"
         required
       ></v-text-field>
 
       <p class="text-primary mb-2 pl-2">Цена (руб)</p>
       <v-text-field
         variant="outlined"
-        :value="Number(product.price)"
+        v-model="product.price"
         type="number"
         class="mb-3"
         max="10000"
@@ -66,7 +67,7 @@
 
       <p class="text-primary mb-2 pl-2">Вес (гр)</p>
       <v-text-field
-        :value="product.weight"
+        v-model="product.weight"
         variant="outlined"
         class="mb-3"
         type="number"
@@ -77,7 +78,7 @@
 
       <p class="text-primary mb-2 pl-2">В наличии (шт)</p>
       <v-text-field
-        :value="product.quantity"
+        v-model="product.quantity"
         variant="outlined"
         class="mb-3"
         type="number"
@@ -96,6 +97,7 @@
       </v-file-input>
 
       <v-btn 
+        @click="updateProduct"
         color="primary"
         class="mt-2 w-100" 
         type="submit" 
@@ -110,9 +112,11 @@
 <script setup>
 import axios from 'axios';
 import { onMounted, reactive } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 const route = useRoute()
+const router = useRouter()
+
 let product = reactive({
   image_url: '',
   name: '',
@@ -155,6 +159,7 @@ const updateProduct = async () => {
   formData.append('category_id', product.category_id);
   formData.append('price', product.price);
   formData.append('weight', product.weight);
+  formData.append('quantity', product.quantity);
 
   // Если изображение выбрано, добавляем его в formData
   const fileInput = document.querySelector('input[type="file"]');
@@ -171,7 +176,9 @@ const updateProduct = async () => {
       },
     });
     if (response.status === 200) {
-      console.log('Товар успешно обновлен');
+      console.log('Товар успешно обновлен')
+      router.push('/admin')
+
     }
   } catch (error) {
     console.error('Ошибка при обновлении товара:', error);

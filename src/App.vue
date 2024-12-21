@@ -1,5 +1,7 @@
 <template>
     <v-app app>
+        <AppNavigation/>
+
         <v-main>
             <v-container>
                 <router-view/>
@@ -9,7 +11,7 @@
 </template>
 
 <script setup>
-// import ""
+import AppNavigation from './components/AppNavigation.vue';
 </script>
 
 <style>

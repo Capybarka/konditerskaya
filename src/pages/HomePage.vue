@@ -1,24 +1,20 @@
 <template>
-    <AppNavigation/>
-
-    <!-- каталог -->
-    <!-- <v-sheet 
-        color="background-dark" 
-        class="pa-5 rounded-lg elevation-10 my-10"
-    >
-        <h1 class="text-primary text-center">Добро пожаловать в кондитерскую ""!</h1>
-    </v-sheet>
-    <v-sheet 
-        color="background-dark"
-        class="pa-5 rounded-lg elevation-10"
-    >
-        <h2 class="text-primary text-center">Выберите свой статус</h2>
-        <v-button></v-button>
-    </v-sheet> -->
+    <admin-login v-if="!isAdminLogin"></admin-login>
+    <admin-panel v-if="isAdminLogin"></admin-panel>
 </template>
 
 <script setup>
-import AppNavigation from '../components/AppNavigation.vue';
+import { ref, watchEffect } from 'vue';
+import AdminLogin from '../components/AdminLogin.vue';
+import AdminPanel from './AdminPanel.vue';
+
+const isAdminLogin = ref(localStorage.getItem('isAdminLogin'))
+
+// Следим за изменениями в localStorage
+watchEffect(() => {
+  isAdminLogin.value = localStorage.getItem('isAdminLogin') === 'true';
+});
+
 </script>
 
 <style>
