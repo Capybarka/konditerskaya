@@ -7,6 +7,7 @@ import { dirname } from 'path';
 import path from 'path';
 import fs from 'fs';
 import multer from 'multer';
+import { type } from 'os';
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -98,14 +99,9 @@ app.put('/api/products/:id', upload.single('image'), (req, res) => {
 
   // Формируем новый путь к изображению, если оно передано
   let imageUrl = req.body.image_url; // Если новое изображение не загружено, используем старое
+  
   if (req.file) {
     imageUrl = '/uploads/' + req.file.filename; // Если изображение загружено, обновляем путь
-  }
-
-  // Проверяем, что все обязательные поля заполнены
-  if (!name || !description || !category_id || !price || !weight || !quantity) {
-    console.error('Ошибка: Не все поля заполнены');
-    return res.status(400).send('Не все поля заполнены');
   }
 
   // Обновляем данные в базе данных
@@ -118,7 +114,7 @@ app.put('/api/products/:id', upload.single('image'), (req, res) => {
     if (result.affectedRows === 0) {
       return res.status(404).send('Товар не найден');
     }
-    res.status(200).json({ message: 'Товар успешно обновлен' });
+    res.status(200).json({ message: 'Товар успешно обновлен'});
   });
 });
 
@@ -147,17 +143,24 @@ app.get('/api/products', (req, res) => {
 app.post('/api/login', (req, res) => {
   const { email, password } = req.body;
 
-  const query = 'SELECT * FROM admins WHERE username = ? AND password = ?';
+  const query = 'SELECT * FROM admins WHERE email = ? AND password = ?';
   db.query(query, [email, password], (err, results) => {
     if (err) {
       console.error('Ошибка выполнения запроса:', err);
       return res.status(500).send({ success: false, message: 'Ошибка сервера' });
     }
 
-    if (results.length > 0) {
+    if (results.length === 0) {
+      return res.status(401).send({ success: false, message: 'Неверный email или пароль' });
+    }
+
+    const admin = results[0];
+  
+    // Сравнение пароля 
+    if (admin.password === password) {
       res.send({ success: true });
     } else {
-      res.send({ success: false });
+      res.status(401).send({ success: false, message: 'Неверный email или пароль' });
     }
   });
 });
