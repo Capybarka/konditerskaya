@@ -57,7 +57,7 @@
 <script setup>
 import ItemCard from '../components/ItemCard.vue';
 import axios from 'axios';
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const products = ref([])
@@ -69,10 +69,9 @@ const fetchProducts = async () => {
     const response = await axios.get('http://localhost:8080/api/products');
     products.value = response.data; // Обновляем массив товаров
   } catch (error) {
-    console.error('Ошибка при получении данных:', error);
+    console.error('Ошибка при получении данных:', error)
   } 
 }
-
 
 const searchingName = ref('')
 const searchProduct = async () => {
@@ -80,13 +79,15 @@ const searchProduct = async () => {
     const response = await axios.get('http://localhost:8080/api/productsOfName', {
       params: { name: searchingName.value },
     })
-    products.value = response.data;
+    products.value = response.data
   } catch (error) {
-    console.error('Ошибка при поиске товара:', error);
-    alert(error.response?.data?.message || 'Ошибка при поиске товара');
+    console.error('Ошибка при поиске товара:', error)
+    alert(error.response?.data?.message || 'Ошибка при поиске товара')
   }
-};
+}
 
-// Получаем данные при монтировании компонента
-// onMounted(fetchProducts);
+const priceFilter = () => {
+
+}
+
 </script>
