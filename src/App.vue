@@ -13,7 +13,5 @@
 </script>
 
 <style>
-.v-container {
-    max-width: 1100px;
-}
+
 </style>

@@ -1,5 +1,7 @@
 <template>
     <AppNavigation/>
+
+    <!-- каталог -->
     <!-- <v-sheet 
         color="background-dark" 
         class="pa-5 rounded-lg elevation-10 my-10"
