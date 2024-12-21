@@ -16,17 +16,34 @@
 
   <v-sheet class="my-10 bg-background-dark elevation-10 rounded-lg pa-5">
     <h2 class="text-primary text-center mb-8">Управление товарами</h2>
-    <v-text-field label="Название товара"></v-text-field>
-    <v-col>
-      <v-row justify="center" align="center">
+    <v-text-field 
+      v-model="searchingName"
+      label="Название товара">
+    </v-text-field>
+    <v-row>
+      <v-col justify="center" align="center">
         <v-btn
+          @click="searchProduct"
           variant="outlined"
           color="primary"
+          class="mr-5"
         >
           Найти
         </v-btn>
-      </v-row>
-    </v-col>
+        
+      </v-col>
+    
+    </v-row>
+    <v-row>
+      <v-col justify="center" align="center">
+        <v-btn
+          @click="fetchProducts"
+          color="primary"
+        >
+          Показать все товары
+        </v-btn>
+      </v-col>
+    </v-row>
   </v-sheet>
 
   <item-card 
@@ -50,13 +67,26 @@ const router = useRouter()
 const fetchProducts = async () => {
   try {
     const response = await axios.get('http://localhost:8080/api/products');
-    console.log(response.data)
     products.value = response.data; // Обновляем массив товаров
   } catch (error) {
     console.error('Ошибка при получении данных:', error);
   } 
 }
 
+
+const searchingName = ref('')
+const searchProduct = async () => {
+  try {
+    const response = await axios.get('http://localhost:8080/api/productsOfName', {
+      params: { name: searchingName.value },
+    })
+    products.value = response.data;
+  } catch (error) {
+    console.error('Ошибка при поиске товара:', error);
+    alert(error.response?.data?.message || 'Ошибка при поиске товара');
+  }
+};
+
 // Получаем данные при монтировании компонента
-onMounted(fetchProducts);
+// onMounted(fetchProducts);
 </script>

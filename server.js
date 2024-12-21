@@ -137,6 +137,31 @@ app.get('/api/products', (req, res) => {
   });
 });
 
+// найти товары по названию
+app.get('/api/productsOfName', (req, res) => {
+  const { name } = req.query; // Получаем название товара из параметров запроса
+
+  if (!name) {
+    return res.status(400).json({ error: 'Название товара не указано' });
+  }
+
+  const query = 'SELECT * FROM products WHERE name LIKE ?';
+  const searchPattern = `%${name}%`; // Создаем шаблон для поиска
+
+  db.query(query, [searchPattern], (err, results) => {
+    if (err) {
+      console.error('Ошибка при выполнении запроса:', err);
+      return res.status(500).json({ error: 'Ошибка сервера' });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ message: 'Товары с указанным названием не найдены' });
+    }
+
+    res.status(200).json(results);
+  });
+});
+
 
 // Маршрут для удаления товара
 app.delete('/api/products/:id', (req, res) => {

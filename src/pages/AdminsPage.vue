@@ -20,15 +20,12 @@ const router = useRouter()
 const fetchAdmins = async () => {
   try {
     const response = await axios.get('http://localhost:8080/api/admins');
-    console.log(response.data)
     admins.value = response.data; // Обновляем массив 
   } catch (error) {
     console.error('Ошибка при получении данных:', error);
   } 
 }
-
 // Получаем данные при монтировании компонента
 onMounted(fetchAdmins);
-
 </script>
 
