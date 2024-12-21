@@ -1,5 +1,5 @@
 <template>
-  <v-sheet class="mt-10 bg-background-dark elevation-10 rounded-lg pa-5">
+  <v-sheet class="my-10 bg-background-dark elevation-10 rounded-lg pa-5">
     <h2 class="text-primary text-center mb-10">Управление товарами</h2>
     <v-text-field label="Название товара"></v-text-field>
     <v-col>
@@ -9,11 +9,12 @@
     </v-col>
   </v-sheet>
 
-  <v-sheet>
-    <item-card v-for="product in products" :key="product.id"
-      :product="product"
-    ></item-card>
-  </v-sheet>
+  <item-card 
+    v-for="product in products" 
+    :key="product.id"
+    :product="product"
+    class="rounded-lg"
+  ></item-card>
 </template>
 
 <script setup>
