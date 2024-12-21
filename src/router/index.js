@@ -5,6 +5,7 @@ import AddItem from '../pages/AddItem.vue'
 import ItemPage from '../pages/ItemPage.vue'
 import AdminLogin from '../components/AdminLogin.vue'
 import RegisterAdmin from '../pages/RegisterAdmin.vue'
+import AdminsPage from '../pages/AdminsPage.vue'
 
 const routes = [
     {
@@ -30,6 +31,10 @@ const routes = [
     {
         path: '/registerAdmin',
         component: RegisterAdmin
+    },
+    {
+        path: '/adminsPage',
+        component: AdminsPage
     },
 ]
 

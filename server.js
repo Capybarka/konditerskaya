@@ -218,6 +218,44 @@ app.post('/api/register', (req, res) => {
 });
 
 
+
+// получениех всех админов
+app.get('/api/admins', (req, res) => {
+  const query = 'SELECT * FROM admins';
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Ошибка при запросе данных:', err);
+      res.status(500).send('Ошибка сервера');
+      return;
+    }
+    res.json(results);  
+  });
+});
+
+// Удаление администратора по ID
+app.delete('/api/admins', (req, res) => {
+  const { id } = req.body; // Получаем ID из тела запроса
+
+  if (!id) {
+    return res.status(400).json({ error: 'Не указан ID администратора' });
+  }
+
+  const query = 'DELETE FROM admins WHERE id = ?';
+  db.query(query, [id], (err, results) => {
+    if (err) {
+      console.error('Ошибка при удалении администратора:', err);
+      return res.status(500).json({ error: 'Ошибка при удалении администратора' });
+    }
+
+    if (results.affectedRows === 0) {
+      return res.status(404).json({ message: 'Администратор с указанным ID не найден' });
+    }
+
+    res.status(200).json({ message: `Администратор с ID ${id} успешно удален` });
+  });
+});
+
 // Запуск сервера
 const port = 8080
 app.listen(port, () => {

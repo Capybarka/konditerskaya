@@ -30,7 +30,6 @@
       <p class="text-primary mb-2 pl-2">Название</p>
       <v-text-field 
         variant="outlined"
-        class="mb-3"
         v-model="product.name"
         required
       ></v-text-field>
@@ -40,7 +39,6 @@
         variant="outlined"
         clear-icon="mdi-close-circle"
         v-model="product.description"
-        class="mb-3"
         clearable
         required
       >
@@ -49,7 +47,6 @@
       <p class="text-primary mb-2 pl-2">Категория</p>
       <v-text-field
         variant="outlined"
-        class="mb-3"
         v-model="product.category_id"
         required
       ></v-text-field>
@@ -59,7 +56,6 @@
         variant="outlined"
         v-model="product.price"
         type="number"
-        class="mb-3"
         max="10000"
         min="50"
         required
@@ -69,7 +65,6 @@
       <v-text-field
         v-model="product.weight"
         variant="outlined"
-        class="mb-3"
         type="number"
         max="10000"
         min="50"
@@ -80,7 +75,6 @@
       <v-text-field
         v-model="product.quantity"
         variant="outlined"
-        class="mb-3"
         type="number"
         max="10000"
         min="50"
