@@ -29,19 +29,31 @@
      <v-sheet
         class="bg-background-dark pa-6 elevation-10"
      >
-     <div class="mw-1000px d-flex justify-space-between">
+     <div class="mw-1400px d-flex justify-space-between">
         <h2 class="text-center text-primary">
             <v-icon class="mr-3">mdi-cupcake</v-icon>
             Десертный уголок
         </h2>
-        <v-btn 
+        <div class="">
+            <v-btn 
             @click="logout"
             inline-block 
             variant="tonal"
             color="primary"
-            >
+            class="mr-5"
+        >
             Выйти
         </v-btn>
+        <v-btn 
+            @click="router.push('/registerAdmin')"
+            inline-block 
+            variant="tonal"
+            color="primary"
+            >
+            Зарегистрировать администратора
+        </v-btn>
+        </div>
+        
     </div>
      </v-sheet>
 </template>
@@ -58,8 +70,8 @@ const logout = () => {
 </script>
 
 <style>
-.mw-1000px {
-    max-width: 1000px;
+.mw-1400px {
+    max-width: 1200px;
     margin: 0 auto;
 }
 </style>

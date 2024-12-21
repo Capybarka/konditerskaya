@@ -50,14 +50,13 @@ const login = async () => {
       alert('Неверные данные! Проверьте email и пароль.')
     }
   } catch (error) {
-    console.error('Ошибка при выполнении запроса:', error);
-    console.error(error.response?.data?.message || 'Ошибка сервера, попробуйте позже.')
+    alert('Ошибка авторизации', error)
   }
 };
 
 </script>
 
-<style scoped>
+<style >
 .mx-500{
   max-width: 600px;
   margin: 0 auto;

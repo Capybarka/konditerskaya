@@ -186,6 +186,38 @@ app.post('/api/login', (req, res) => {
 });
 
 
+// POST запрос на регистрацию администратора
+app.post('/api/register', (req, res) => {
+  const { name, last_name, middle_name, email, password } = req.body;
+
+   // Проверка на существующего администратора по email
+   db.query('SELECT * FROM admins WHERE email = ?', [email], (err, results) => {
+    if (err) {
+      console.error('Ошибка при проверке email:', err);
+      return res.status(500).json({ error: 'Ошибка при проверке email' });
+    }
+    
+    if (results.length > 0) {
+      return res.status(400).json({ error: 'Администратор с таким email уже существует' });
+    }
+
+    // Вставка нового администратора в базу данных
+    const query = 'INSERT INTO admins (name, last_name, middle_name, email, password) VALUES (?, ?, ?, ?, ?)';
+    db.query(query, [name, last_name, middle_name, email, password], (err, results) => {
+      if (err) {
+        console.error('Ошибка при добавлении администратора:', err);
+        return res.status(500).json({ error: 'Ошибка при сохранении администратора в базе данных' });
+      }
+
+      res.status(201).json({
+        message: 'Администратор успешно зарегистрирован',
+        admin: { id: results.insertId, name, last_name, middle_name, email },
+      });
+    });
+  });
+});
+
+
 // Запуск сервера
 const port = 8080
 app.listen(port, () => {

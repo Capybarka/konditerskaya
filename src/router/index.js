@@ -4,6 +4,7 @@ import AdminPanel from '../pages/AdminPanel.vue'
 import AddItem from '../pages/AddItem.vue'
 import ItemPage from '../pages/ItemPage.vue'
 import AdminLogin from '../components/AdminLogin.vue'
+import RegisterAdmin from '../pages/RegisterAdmin.vue'
 
 const routes = [
     {
@@ -25,6 +26,10 @@ const routes = [
     {
         path: '/adminLogin',
         component: AdminLogin
+    },
+    {
+        path: '/registerAdmin',
+        component: RegisterAdmin
     },
 ]
 
