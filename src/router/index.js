@@ -3,6 +3,7 @@ import HomePage from '../pages/HomePage.vue'
 import AdminPanel from '../pages/AdminPanel.vue'
 import AddItem from '../pages/AddItem.vue'
 import ItemPage from '../pages/ItemPage.vue'
+import AdminLogin from '../pages/AdminLogin.vue'
 
 const routes = [
     {
@@ -20,6 +21,10 @@ const routes = [
     {
         path: '/product/:id',
         component: ItemPage
+    },
+    {
+        path: '/adminLogin',
+        component: AdminLogin
     },
 ]
 

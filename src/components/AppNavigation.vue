@@ -12,7 +12,11 @@
             <v-btn color="primary" variant="outlined" class="mr-10">
                 Войти
             </v-btn>
-            <v-btn @click="router.push('/admin')" color="primary" variant="outlined">
+            <v-btn 
+                @click="router.push('/adminLogin')" 
+                color="primary" 
+                variant="tonal"
+            >
                 Администратор
             </v-btn>
         </div>

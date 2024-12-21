@@ -19,7 +19,8 @@
         <p class="mb-3"><span class="text-primary font-weight-bold">Цена: </span>: {{ product.price }} руб</p>
         <p class="mb-3"><span class="text-primary font-weight-bold">Категория: </span> {{ product.category_id }}</p>
         <p class="mb-3"><span class="text-primary font-weight-bold">Вес: </span> {{ product.weight }} грамм</p>
-      
+        <p class="mb-3"><span class="text-primary font-weight-bold">В наличии: </span> {{ product.quantity }} шт</p>
+
         <v-btn 
           @click="showDetail"
           variant="tonal"

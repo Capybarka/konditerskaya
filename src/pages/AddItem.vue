@@ -46,6 +46,15 @@
         required
       ></v-text-field>
 
+      <v-text-field
+        type="number"
+        v-model="quantity"
+        label="Количество (шт)"
+        max="1000"
+        min="1"
+        required
+      ></v-text-field>
+
       <v-file-input 
         clearable 
         label="Выберите изображение" 
@@ -82,6 +91,7 @@ let category_id = 0;
 
 const price = ref()
 const weight = ref()
+const quantity = ref()
 const image_url = ref('')
 
 const submitForm = async () => {
@@ -103,6 +113,7 @@ const submitForm = async () => {
   formData.append('category_id', category_id);
   formData.append('price', price.value);
   formData.append('weight', weight.value);
+  formData.append('quantity', quantity.value);
   formData.append('image', image_url.value);
 
   try {
