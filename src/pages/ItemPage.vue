@@ -45,6 +45,7 @@
       </v-textarea>
 
       <p class="text-primary mb-2 pl-2">Категория</p>
+      <p class="mb-2 pl-2"><span class="text-primary font-weight-bold">1</span> - Торты; <span class="text-primary font-weight-bold">2</span> - Пирожные; <span class="text-primary font-weight-bold">3</span> - Капкейки</p>
       <v-text-field
         variant="outlined"
         v-model="product.category_id"
@@ -180,12 +181,11 @@ const updateProduct = async () => {
       },
     });
     if (response.status === 200) {
-      console.log('Товар успешно обновлен')
+      alert('Товар успешно обновлен')
       router.push('/admin')
-
     }
   } catch (error) {
-    console.error('Ошибка при обновлении товара:', error);
+    alert('Ошибка при обновлении товара:', error);
   }
 };
 

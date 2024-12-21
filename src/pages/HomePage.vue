@@ -1,5 +1,6 @@
 <template>
     <admin-login v-if="!isAdminLogin"></admin-login>
+    
     <admin-panel v-if="isAdminLogin"></admin-panel>
 </template>
 
@@ -10,13 +11,7 @@ import AdminPanel from './AdminPanel.vue';
 
 const isAdminLogin = ref(localStorage.getItem('isAdminLogin'))
 
-// Следим за изменениями в localStorage
 watchEffect(() => {
   isAdminLogin.value = localStorage.getItem('isAdminLogin') === 'true';
 });
-
 </script>
-
-<style>
-
-</style>

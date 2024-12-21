@@ -146,7 +146,7 @@ app.get('/api/productsOfName', (req, res) => {
   }
 
   const query = 'SELECT * FROM products WHERE name LIKE ?';
-  const searchPattern = `%${name}%`; // Создаем шаблон для поиска
+  const searchPattern = `%${name}%`
 
   db.query(query, [searchPattern], (err, results) => {
     if (err) {

@@ -57,7 +57,7 @@
 <script setup>
 import ItemCard from '../components/ItemCard.vue';
 import axios from 'axios';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const products = ref([])
@@ -86,8 +86,5 @@ const searchProduct = async () => {
   }
 }
 
-const priceFilter = () => {
-
-}
-
+onMounted(fetchProducts)
 </script>

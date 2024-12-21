@@ -17,7 +17,7 @@
         <p class="mb-3"><span class="text-primary font-weight-bold">Название: </span>{{product.name}}</p>
         <p class="mb-3"><span class="text-primary font-weight-bold">Описание: </span>: {{ product.description }}</p>
         <p class="mb-3"><span class="text-primary font-weight-bold">Цена: </span>: {{ product.price }} руб</p>
-        <p class="mb-3"><span class="text-primary font-weight-bold">Категория: </span> {{ product.category_id }}</p>
+        <p class="mb-3"><span class="text-primary font-weight-bold">Категория: </span> {{ product.category_id }} - {{ categoryText }}</p>
         <p class="mb-3"><span class="text-primary font-weight-bold">Вес: </span> {{ product.weight }} грамм</p>
         <p class="mb-3"><span class="text-primary font-weight-bold">В наличии: </span> {{ product.quantity }} шт</p>
 
@@ -34,6 +34,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const props = defineProps({
@@ -46,8 +47,20 @@ const props = defineProps({
 const router = useRouter()
 
 const showDetail = () => {
-console.log(props.product.id)
   router.push(`/product/${props.product.id}`)
+}
+
+let categoryText = ref('')
+switch (props.product.category_id) {
+  case 1: 
+    categoryText = 'Торты'
+    break
+  case 2: 
+    categoryText = 'Пирожные'
+    break
+  case 3: 
+    categoryText = 'Капкейки'
+    break
 }
 </script>
 
